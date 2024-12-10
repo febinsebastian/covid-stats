@@ -1,0 +1,38 @@
+<div class="selector">
+  <p
+    class="icon"
+    (click)="changeSelection()"
+    [ngClass]="{ selected: !(selectedCountry$ | async) }"
+  >
+    🌎
+  </p>
+  <p
+    class="icon"
+    (click)="changeSelection('germany')"
+    [ngClass]="{ selected: (selectedCountry$ | async) === 'germany' }"
+  >
+    🇩🇪
+  </p>
+</div>
+<div class="indicators">
+  <app-indicator
+    [data]="data"
+    *ngFor="let data of indicatorData"
+  ></app-indicator>
+</div>
+<div class="charts">
+  <div class="chart-container">
+    <h3>
+      Covid History of
+      {{ (selectedCountry$ | async) ? "Germany" : "World wide" }}
+    </h3>
+    <app-history-chart [country]="(selectedCountry$ | async) || undefined" />
+  </div>
+  <div class="chart-container">
+    <h3>
+      Vaccination details of
+      {{ (selectedCountry$ | async) ? "Germany" : "World wide" }}
+    </h3>
+    <app-vaccine-chart [country]="(selectedCountry$ | async) || undefined" />
+  </div>
+</div>
