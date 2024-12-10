@@ -15,10 +15,9 @@
   </p>
 </div>
 <div class="indicators">
-  <app-indicator
-    [data]="data"
-    *ngFor="let data of indicatorData"
-  ></app-indicator>
+  @for (item of indicatorData; track item.key) {
+  <app-indicator [data]="item"></app-indicator>
+  }
 </div>
 <div class="charts">
   <div class="chart-container">

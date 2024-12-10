@@ -20,7 +20,6 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class HistoryChartComponent implements OnChanges {
   @Input() country?: string;
-  covidHistory!: CovidHistory;
   chart!: unknown;
 
   constructor(private readonly dashboardService: DashboardService) {}
@@ -35,11 +34,17 @@ export class HistoryChartComponent implements OnChanges {
         next: (response) => {
           this.generateChart(response.timeline);
         },
+        error: (error) => {
+          console.log(error);
+        },
       });
     } else {
       this.dashboardService.fetchHistory().subscribe({
         next: (response) => {
           this.generateChart(response);
+        },
+        error: (error) => {
+          console.log(error);
         },
       });
     }

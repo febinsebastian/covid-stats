@@ -35,11 +35,17 @@ export class VaccineChartComponent {
           next: (response) => {
             this.generateChart(response.timeline);
           },
+          error: (error) => {
+            console.log(error);
+          },
         });
     } else {
       this.dashboardService.fetchVaccinationStatisticalData('').subscribe({
         next: (response) => {
           this.generateChart(response);
+        },
+        error: (error) => {
+          console.log(error);
         },
       });
     }
